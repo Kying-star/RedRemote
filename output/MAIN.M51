@@ -1,19 +1,22 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        09/12/2020  17:26:50  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        12/23/2020  17:05:40  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
-D:\KEIL4C51\C51\BIN\BL51.EXE C51S.LIB, MAIN.OBJ, STARTUP.OBJ TO MAIN
+D:\KEIL4C51\C51\BIN\BL51.EXE C51S.LIB, LCD.OBJ, MAIN.OBJ, RED.OBJ, STARTUP.OBJ TO MAIN
 
 
 MEMORY MODEL: SMALL
 
 
 INPUT MODULES INCLUDED:
+  LCD.OBJ (LCD)
   MAIN.OBJ (MAIN)
+  RED.OBJ (RED)
   STARTUP.OBJ (?C_STARTUP)
+  C51S.LIB (?C?CCASE)
 
 
-LINK MAP OF MODULE:  MAIN (MAIN)
+LINK MAP OF MODULE:  MAIN (LCD)
 
 
             TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
@@ -21,23 +24,72 @@ LINK MAP OF MODULE:  MAIN (MAIN)
 
             * * * * * * *   D A T A   M E M O R Y   * * * * * * *
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
-            IDATA   0008H     0001H     UNIT         ?STACK
+            DATA    0008H     0010H     UNIT         ?DT?MAIN
+            DATA    0018H     0006H     UNIT         _DATA_GROUP_
+            IDATA   001EH     0001H     UNIT         ?STACK
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
-            CODE    0003H     000CH     UNIT         ?C_C51STARTUP
-            CODE    000FH     0004H     UNIT         ?PR?MAIN?MAIN
+            CODE    0003H     0003H     ABSOLUTE     
+            CODE    0006H     012EH     UNIT         ?PR?READIR?MAIN
+            CODE    0134H     006EH     UNIT         ?PR?MAIN?MAIN
+            CODE    01A2H     0053H     UNIT         ?PR?_GETNUMVALUE?RED
+            CODE    01F5H     0042H     UNIT         ?PR?_LCD1602_DELAY1MS?LCD
+            CODE    0237H     0026H     UNIT         ?C?LIB_CODE
+            CODE    025DH     001EH     UNIT         ?PR?LCDINIT?LCD
+            CODE    027BH     001DH     UNIT         ?CO?MAIN
+            CODE    0298H     000CH     UNIT         ?PR?_LCDWRITECOM?LCD
+            CODE    02A4H     000CH     UNIT         ?PR?_LCDWRITEDATA?LCD
+            CODE    02B0H     000CH     UNIT         ?C_C51STARTUP
+            CODE    02BCH     000BH     UNIT         ?PR?_DELAY?RED
+            CODE    02C7H     0009H     UNIT         ?PR?IRINIT?RED
 
 
 
-OVERLAY MAP OF MODULE:   MAIN (MAIN)
+OVERLAY MAP OF MODULE:   MAIN (LCD)
 
 
-SEGMENT
-  +--> CALLED SEGMENT
----------------------
-?C_C51STARTUP
+SEGMENT                             DATA_GROUP 
+  +--> CALLED SEGMENT             START    LENGTH
+-------------------------------------------------
+?PR?READIR?MAIN                   0018H    0004H
+  +--> ?PR?_DELAY?RED
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP                     -----    -----
   +--> ?PR?MAIN?MAIN
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/23/2020  17:05:40  PAGE 2
 
-Program Size: data=9.0 xdata=0 code=19
+
+
+?PR?MAIN?MAIN                     001CH    0002H
+  +--> ?PR?LCDINIT?LCD
+  +--> ?PR?IRINIT?RED
+  +--> ?PR?_LCDWRITECOM?LCD
+  +--> ?CO?MAIN
+  +--> ?PR?_LCDWRITEDATA?LCD
+  +--> ?PR?_GETNUMVALUE?RED
+
+?PR?LCDINIT?LCD                   -----    -----
+  +--> ?PR?_LCDWRITECOM?LCD
+
+?PR?_LCDWRITECOM?LCD              -----    -----
+  +--> ?PR?_LCD1602_DELAY1MS?LCD
+
+?PR?_LCDWRITEDATA?LCD             -----    -----
+  +--> ?PR?_LCD1602_DELAY1MS?LCD
+
+
+
+SYMBOL TABLE OF MODULE:  MAIN (LCD)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C?CCASE
+  C:0237H         PUBLIC        ?C?CCASE
+  -------         ENDMOD        ?C?CCASE
+
+Program Size: data=31.0 xdata=0 code=720
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

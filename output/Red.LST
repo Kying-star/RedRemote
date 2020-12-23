@@ -1,0 +1,88 @@
+C51 COMPILER V9.01   RED                                                                   12/23/2020 17:05:40 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE RED
+OBJECT MODULE PLACED IN Red.OBJ
+COMPILER INVOKED BY: D:\keil4C51\C51\BIN\C51.exe Red.c
+
+line level    source
+
+   1          /*
+   2           * @Description: 
+   3           * @Version: 0.0
+   4           * @Autor: kying-Star
+   5           * @Date: 2020-12-20 21:26:18
+   6           * @LastEditors: kyingstar
+   7           * @LastEditTime: 2020-12-20 21:44:57
+   8           */
+   9          #include "Red.h"
+  10          sbit IRIN = P3 ^ 2;
+  11          uint getNumValue(uchar Ir)
+  12          {
+  13   1        uchar hongwai = ' ';
+  14   1        switch (Ir)
+  15   1        {
+  16   2        case 0x16:
+  17   2          hongwai = 0;
+  18   2          break;
+  19   2        case 0x0c:
+  20   2          hongwai = 1;
+  21   2          break;
+  22   2        case 0x18:
+  23   2          hongwai = 2;
+  24   2          break;
+  25   2        case 0x5e:
+  26   2          hongwai = 3;
+  27   2          break;
+  28   2        case 0x08:
+  29   2          hongwai = 4;
+  30   2          break;
+  31   2        case 0x1c:
+  32   2          hongwai = 5;
+  33   2          break;
+  34   2        case 0x5a:
+  35   2          hongwai = 6;
+  36   2          break;
+  37   2        case 0x42:
+  38   2          hongwai = 7;
+  39   2          break;
+  40   2        case 0x52:
+  41   2          hongwai = 8;
+  42   2          break;
+  43   2        case 0x4a:
+  44   2          hongwai = 9;
+  45   2          break;
+  46   2        }
+  47   1        return hongwai;
+  48   1      }
+  49          
+  50          void delay(uint i)
+  51          {
+  52   1        while (i--)
+  53   1          ;
+  54   1      }
+  55          
+C51 COMPILER V9.01   RED                                                                   12/23/2020 17:05:40 PAGE 2   
+
+  56          void IrInit()
+  57          {
+  58   1        IT0 = 1;
+  59   1        EX0 = 1;
+  60   1        EA = 1;
+  61   1      
+  62   1        IRIN = 1;
+  63   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    103    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
